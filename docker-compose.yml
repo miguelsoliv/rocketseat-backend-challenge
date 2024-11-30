@@ -4,7 +4,7 @@ services:
   postgres:
     container_name: challenge_postgres
     image: "bitnami/postgresql"
-    restart: always
+    # restart: always
     ports:
       - "5432:5432"
     environment:
