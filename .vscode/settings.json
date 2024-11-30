@@ -1,0 +1,10 @@
+{
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.lineHeight": 24,
+  "editor.rulers": [80, 120],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+}
