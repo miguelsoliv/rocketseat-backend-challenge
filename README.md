@@ -15,17 +15,18 @@ Bom desafio!
 
 ---
 
+- [🚀 Back end challenge](#-back-end-challenge)
 - [🧠 Contexto](#-contexto)
-  - [🚰 Fluxo esperado](#-fluxo-esperado)
-  - [⚔️ Desafio](#️-desafio)
-  - [📓 Submissão](#-submissão)
-- [✔️ Critérios de Avaliação](#️-critérios-de-avaliação)
-  - [😎 Seria legal](#-seria-legal)
-- [:rocket: Instruções](#rocket-instruções)
-  - [Docker](#docker)
-  - [Kafka](#kafka)
-  - [GraphQL](#graphql)
-  - [:notebook: To-do list](#notebook-to-do-list)
+    - [🚰 Fluxo esperado](#-fluxo-esperado)
+    - [⚔️ Desafio](#️-desafio)
+    - [📓 Submissão](#-submissão)
+  - [✔️ Critérios de Avaliação](#️-critérios-de-avaliação)
+    - [😎 Seria legal](#-seria-legal)
+  - [:rocket: Instruções](#rocket-instruções)
+    - [Docker](#docker)
+    - [Kafka](#kafka)
+    - [GraphQL](#graphql)
+    - [:notebook: To-do list](#notebook-to-do-list)
 
 # 🧠 Contexto
 
@@ -141,8 +142,8 @@ Mutation {
 ```
 
 ### :notebook: To-do list
-- [ ] Fazer o fork do projeto
-- [ ] Configurar ambiente de desenvolvimento (inclusive executar o serviço de [corrections](packages/corrections))
+- [x] Fazer o fork do projeto
+- [x] Configurar ambiente de desenvolvimento (inclusive executar o serviço de [corrections](packages/corrections))
 - [ ] Criar uma [API GraphQL](https://docs.nestjs.com/graphql/quick-start) com o [contexto](#-contexto) acima utilizando Typescript
 - [ ] Fazer a integração com o serviço de [corrections](packages/corrections) através do Apache Kafka
 - [ ] Incluir no README as instruções de instalação do projeto
