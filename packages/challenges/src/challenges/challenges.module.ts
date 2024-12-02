@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ChallengesService } from './challenges.service';
+import { DatabaseModule } from '../infra/database/database.module';
+import { CreateChallengeService } from './use-cases/create-challenge';
 import { ChallengesResolver } from './challenges.resolver';
-import { DatabaseModule } from '../database/database.module';
 
 @Module({
   imports: [DatabaseModule],
-  providers: [ChallengesResolver, ChallengesService],
+  providers: [ChallengesResolver, CreateChallengeService],
 })
 export class ChallengesModule {}
