@@ -21,6 +21,7 @@ type Query {
 type Mutation {
   createChallenge(data: CreateChallengeInput!): Challenge!
   deleteChallenge(id: UUID!): Challenge!
+  updateChallenge(data: UpdateChallengeInput!): Challenge!
 }
 
 input CreateChallengeInput {
@@ -30,3 +31,9 @@ input CreateChallengeInput {
 
 """UUID validator"""
 scalar UUID
+
+input UpdateChallengeInput {
+  id: UUID!
+  title: String
+  description: String
+}

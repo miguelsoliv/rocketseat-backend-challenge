@@ -10,12 +10,17 @@ import {
   ListChallengesService,
 } from './use-cases/list-challenges';
 import { DeleteChallengeService } from './use-cases/delete-challenge';
+import {
+  UpdateChallengeInput,
+  UpdateChallengeService,
+} from './use-cases/update-challenge';
 
 @Resolver(() => Challenge)
 export class ChallengesResolver {
   constructor(
     private readonly createChallengeService: CreateChallengeService,
     private readonly deleteChallengeService: DeleteChallengeService,
+    private readonly updateChallengesService: UpdateChallengeService,
     private readonly listChallengesService: ListChallengesService,
   ) {}
 
@@ -27,6 +32,11 @@ export class ChallengesResolver {
   @Mutation(() => Challenge)
   async deleteChallenge(@Args('id', { type: () => UuidScalar }) id: string) {
     return this.deleteChallengeService.run(id);
+  }
+
+  @Mutation(() => Challenge)
+  async updateChallenge(@Args('data') data: UpdateChallengeInput) {
+    return this.updateChallengesService.run(data);
   }
 
   @Query(() => [Challenge])

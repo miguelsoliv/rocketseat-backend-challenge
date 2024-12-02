@@ -4,6 +4,7 @@ import { CreateChallengeService } from './use-cases/create-challenge';
 import { ListChallengesService } from './use-cases/list-challenges';
 import { ChallengesResolver } from './challenges.resolver';
 import { DeleteChallengeService } from './use-cases/delete-challenge';
+import { UpdateChallengeService } from './use-cases/update-challenge';
 
 @Module({
   imports: [DatabaseModule],
@@ -11,6 +12,7 @@ import { DeleteChallengeService } from './use-cases/delete-challenge';
     ChallengesResolver,
     CreateChallengeService,
     DeleteChallengeService,
+    UpdateChallengeService,
     ListChallengesService,
   ],
 })
