@@ -9,7 +9,7 @@ datasource db {
 
 model Challenge {
   id          String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  title       String 
+  title       String   @unique
   description String
   createdAt   DateTime @default(now()) @db.Timestamp(6)
   answers     Answer[]
