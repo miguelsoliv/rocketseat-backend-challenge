@@ -25,6 +25,11 @@ No decorrer do desenvolvimento, optei por seguir alguns caminhos baseado no cont
 </details>
 
 <details>
+  <summary><strong>Code First</strong></summary>
+
+</details>
+
+<details>
   <summary><strong>Package manager + linter</strong></summary>
 
   Normalmente utilizo o PNPM (principalmente pela agilidade na hora de instalar as libs e o pouco espaço que ocupa depois da instalação delas) e o Biome (menos dependências e muito rápido) mas segui com o Yarn e ESLint + prettier apenas por já estarem integrados com o serviço de `corrections`

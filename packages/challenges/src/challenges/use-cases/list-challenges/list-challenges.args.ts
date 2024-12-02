@@ -1,17 +1,25 @@
-import { Optional } from '@nestjs/common';
-import { ArgsType, Field } from '@nestjs/graphql';
-import { IsNotEmpty } from 'class-validator';
+import { ArgsType, Field, Int } from '@nestjs/graphql';
+import { IsNotEmpty, IsOptional, IsPositive } from 'class-validator';
 
-// TODO: add pagination props
 @ArgsType()
 export class ListChallengesArgs {
   @Field({ nullable: true })
   @IsNotEmpty()
-  @Optional()
+  @IsOptional()
   title?: string;
 
   @Field({ nullable: true })
   @IsNotEmpty()
-  @Optional()
+  @IsOptional()
   description?: string;
+
+  @Field(() => Int, { defaultValue: 1 })
+  @IsPositive()
+  @IsOptional()
+  page: number;
+
+  @Field(() => Int, { defaultValue: 10 })
+  @IsPositive()
+  @IsOptional()
+  limit: number;
 }
