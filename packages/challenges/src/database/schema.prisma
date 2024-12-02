@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+model Challenge {
+  id          String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  title       String 
+  description String
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  answers     Answer[]
+
+  @@map("challenges")
+}
+
+enum AnswerStatus {
+  Pending
+  Error
+  Done
+
+  @@map("answer_status_enum")
+}
+
+model Answer {
+  id            String       @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  repositoryUrl String       
+  status        AnswerStatus 
+  note          Int          
+  challenge     Challenge    @relation(fields: [challengeId], references: [id])
+  challengeId   String       @db.Uuid
+
+  @@map("answers")
+}
