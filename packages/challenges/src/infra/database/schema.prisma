@@ -12,6 +12,7 @@ model Challenge {
   title       String   @unique
   description String
   createdAt   DateTime @default(now()) @db.Timestamp(6)
+
   answers     Answer[]
 
   @@map("challenges")
@@ -29,7 +30,9 @@ model Answer {
   id            String        @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   repositoryUrl String?       
   status        AnswerStatus  
-  grade          Int           
+  grade         Int           
+  createdAt     DateTime      @default(now()) @db.Timestamp(6)
+
   challenge     Challenge?    @relation(fields: [challengeId], references: [id])
   challengeId   String?       @db.Uuid
 
