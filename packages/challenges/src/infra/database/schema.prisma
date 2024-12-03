@@ -29,7 +29,7 @@ model Answer {
   id            String        @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   repositoryUrl String?       
   status        AnswerStatus  
-  note          Int           
+  grade          Int           
   challenge     Challenge?    @relation(fields: [challengeId], references: [id])
   challengeId   String?       @db.Uuid
 

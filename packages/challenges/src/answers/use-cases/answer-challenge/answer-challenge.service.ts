@@ -26,7 +26,7 @@ export class AnswerChallengeService {
     if (!challenge || !isValidRepoUrl) {
       await this.prismaService.answer.create({
         data: {
-          note: -1,
+          grade: -1,
           repositoryUrl: null,
           status: AnswerStatus.Error,
         },
@@ -39,7 +39,7 @@ export class AnswerChallengeService {
 
     const answer = await this.prismaService.answer.create({
       data: {
-        note: -1,
+        grade: -1,
         repositoryUrl: data.repositoryUrl,
         status: AnswerStatus.Pending,
         challengeId: data.challengeId,
@@ -50,6 +50,8 @@ export class AnswerChallengeService {
       submissionId: answer.id,
       repositoryUrl: data.repositoryUrl,
     });
+
+    return answer;
   }
 
   private async checkForValidGithubUrl(repoUrl: string) {

@@ -19,7 +19,7 @@ CREATE TABLE "answers" (
     "id" UUID NOT NULL DEFAULT uuid_generate_v4(),
     "repositoryUrl" TEXT,
     "status" "answer_status_enum" NOT NULL,
-    "note" INTEGER NOT NULL,
+    "grade" INTEGER NOT NULL,
     "challengeId" UUID,
 
     CONSTRAINT "answers_pkey" PRIMARY KEY ("id")
