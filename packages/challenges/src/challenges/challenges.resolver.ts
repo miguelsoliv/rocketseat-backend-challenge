@@ -40,7 +40,7 @@ export class ChallengesResolver {
   }
 
   @Query(() => [Challenge])
-  async challenges(@Args() listChallengesData: ListChallengesArgs) {
-    return this.listChallengesService.run(listChallengesData);
+  async challenges(@Args() data: ListChallengesArgs) {
+    return this.listChallengesService.run(data);
   }
 }

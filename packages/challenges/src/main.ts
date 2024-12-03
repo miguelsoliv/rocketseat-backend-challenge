@@ -1,5 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
+import { registerEnumType } from '@nestjs/graphql';
+import { AnswerStatus } from '@prisma/client';
 import { env } from './infra/config';
 import { AppModule } from './app.module';
 
@@ -20,10 +22,10 @@ async function bootstrap() {
     }),
   );
 
-  const port = env.PORT;
+  registerEnumType(AnswerStatus, { name: 'AnswerStatus' });
 
-  await app.listen(port, () => {
-    console.info(`[‼] Server started at port ${port}!`);
+  await app.listen(env.PORT, () => {
+    console.info(`[‼] Server started at port ${env.PORT}!`);
   });
 }
 bootstrap();

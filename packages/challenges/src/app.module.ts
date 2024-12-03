@@ -4,6 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { UuidScalar } from '@core/scalars';
 import { ChallengesModule } from './challenges/challenges.module';
+import { AnswersModule } from './answers/answers.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { ChallengesModule } from './challenges/challenges.module';
       resolvers: { UUID: UuidScalar },
     }),
     ChallengesModule,
+    AnswersModule,
   ],
 })
 export class AppModule {}

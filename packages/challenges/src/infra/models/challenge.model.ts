@@ -1,8 +1,9 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { UuidScalar } from '@core/scalars';
 
 @ObjectType()
 export class Challenge {
-  @Field(() => ID)
+  @Field(() => UuidScalar)
   id: string;
 
   @Field()
