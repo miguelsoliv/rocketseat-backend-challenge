@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { AnswerStatus } from '@prisma/client';
 import axios from 'axios';
+import { firstValueFrom } from 'rxjs';
 import { ChallengeNotFound, InvalidRepositoryUrlError } from '@core/errors';
 import { PrismaService } from '@infra/database/prisma.service';
 import { AnswerChallengeInput } from './answer-challenge.input';
@@ -46,12 +47,20 @@ export class AnswerChallengeService {
       },
     });
 
-    this.kafka.send('challenge.correction', {
-      submissionId: answer.id,
-      repositoryUrl: data.repositoryUrl,
-    });
+    const answerWithGrade = await firstValueFrom(
+      this.kafka.send<
+        { grade: number; status: AnswerStatus },
+        { submissionId: string; repositoryUrl: string }
+      >('challenge.correction', {
+        submissionId: answer.id,
+        repositoryUrl: data.repositoryUrl,
+      }),
+    );
 
-    return answer;
+    return this.prismaService.answer.update({
+      where: { id: answer.id },
+      data: { grade: answerWithGrade.grade, status: answerWithGrade.status },
+    });
   }
 
   private async checkForValidGithubUrl(repoUrl: string) {
