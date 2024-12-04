@@ -1,19 +1,15 @@
-import { ArgsType, Field, Int } from '@nestjs/graphql';
+import { ArgsType, Field } from '@nestjs/graphql';
 import { AnswerStatus } from '@prisma/client';
-import {
-  IsDate,
-  IsEnum,
-  IsNotEmpty,
-  IsOptional,
-  IsPositive,
-} from 'class-validator';
+import { IsDate, IsEnum, IsNotEmpty, IsOptional } from 'class-validator';
 import { UuidScalar } from '@core/scalars';
+import { PaginationArgs } from '../../../shared/dtos';
 
 @ArgsType()
-export class ListAnswersArgs {
-  @Field(() => UuidScalar)
+export class ListAnswersArgs extends PaginationArgs {
+  @Field(() => UuidScalar, { nullable: true })
   @IsNotEmpty()
-  challengeId: string;
+  @IsOptional()
+  challengeId?: string;
 
   @Field(() => AnswerStatus, { nullable: true })
   @IsEnum(AnswerStatus)
@@ -29,14 +25,4 @@ export class ListAnswersArgs {
   @IsDate()
   @IsOptional()
   answeredEndAt?: Date;
-
-  @Field(() => Int, { defaultValue: 1 })
-  @IsPositive()
-  @IsOptional()
-  page: number;
-
-  @Field(() => Int, { defaultValue: 10 })
-  @IsPositive()
-  @IsOptional()
-  limit: number;
 }

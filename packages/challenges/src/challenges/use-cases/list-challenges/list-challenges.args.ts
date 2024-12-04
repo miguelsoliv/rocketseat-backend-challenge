@@ -1,8 +1,9 @@
-import { ArgsType, Field, Int } from '@nestjs/graphql';
-import { IsNotEmpty, IsOptional, IsPositive } from 'class-validator';
+import { ArgsType, Field } from '@nestjs/graphql';
+import { IsNotEmpty, IsOptional } from 'class-validator';
+import { PaginationArgs } from '../../../shared/dtos';
 
 @ArgsType()
-export class ListChallengesArgs {
+export class ListChallengesArgs extends PaginationArgs {
   @Field({ nullable: true })
   @IsNotEmpty()
   @IsOptional()
@@ -12,14 +13,4 @@ export class ListChallengesArgs {
   @IsNotEmpty()
   @IsOptional()
   description?: string;
-
-  @Field(() => Int, { defaultValue: 1 })
-  @IsPositive()
-  @IsOptional()
-  page: number;
-
-  @Field(() => Int, { defaultValue: 10 })
-  @IsPositive()
-  @IsOptional()
-  limit: number;
 }

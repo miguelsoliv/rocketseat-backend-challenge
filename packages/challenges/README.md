@@ -5,6 +5,7 @@ Serviço que gerencia os desafios enviados pelos alunos
 - Rodar o docker para criação dos serviços e banco: `docker-compose up -d`
 - Instalar as dependências: `yarn`
 - (Opcional) Criar o arquivo `.env` com o mesmo conteúdo do `.env.example`, alterando apenas as configurações que julgar necessário
+- Gerar as tipagens do Prisma: `yarn prisma:generate`
 - Rodar o projeto em modo de desenvolvimento: `yarn dev`
 
 ### Decisões
@@ -22,6 +23,13 @@ No decorrer do desenvolvimento, optei por seguir alguns caminhos baseado no cont
   - tipagens e documentação muito boas (possui até uma página na própria documentação do Nest)
   - TypeORM acabou ficando meio parado no tempo (só agora estão [anunciando o futuro da lib](https://github.com/typeorm/typeorm/blob/master/docs/future-of-typeorm.md))
   - ainda não possuo muita familiaridade com o Drizzle, mas seu query builder é parecido com SQL, o que pode facilitar ou dificultar o uso pelos devs (o ideal seria validar com o time, mas não é esse o caso)
+</details>
+
+<details>
+  <summary><strong>Paginação</strong></summary>
+
+  #### Abordagem
+  Utilizando offset e limit ao invés da paginação por cursor
 </details>
 
 <details>
