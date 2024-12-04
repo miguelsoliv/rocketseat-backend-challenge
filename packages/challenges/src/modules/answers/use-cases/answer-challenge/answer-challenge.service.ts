@@ -26,23 +26,19 @@ export class AnswerChallengeService {
 
     if (!challenge || !isValidRepoUrl) {
       await this.prismaService.answer.create({
-        data: {
-          grade: -1,
-          repositoryUrl: null,
-          status: AnswerStatus.Error,
-        },
+        data: { grade: 0, status: AnswerStatus.Error },
       });
 
-      throw !challenge
-        ? new ChallengeNotFound()
-        : new InvalidRepositoryUrlError();
+      throw challenge
+        ? new InvalidRepositoryUrlError()
+        : new ChallengeNotFound();
     }
 
     const answer = await this.prismaService.answer.create({
       data: {
-        grade: -1,
-        repositoryUrl: data.repositoryUrl,
+        grade: 0,
         status: AnswerStatus.Pending,
+        repositoryUrl: data.repositoryUrl,
         challengeId: data.challengeId,
       },
     });

@@ -2,10 +2,10 @@ import { Inject, Module } from '@nestjs/common';
 import { ClientKafka, ClientsModule, Transport } from '@nestjs/microservices';
 import { Partitioners } from 'kafkajs';
 import { DatabaseModule } from '@infra/database/database.module';
+import { PaginateQueryService } from '@core/services';
 import { AnswersResolver } from './answers.resolver';
 import { AnswerChallengeService } from './use-cases/answer-challenge';
 import { ListAnswersService } from './use-cases/list-answers';
-import { PaginateQueryService } from '../shared/services';
 
 @Module({
   imports: [

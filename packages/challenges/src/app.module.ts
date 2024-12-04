@@ -3,8 +3,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { UuidScalar } from '@core/scalars';
-import { ChallengesModule } from './challenges/challenges.module';
-import { AnswersModule } from './answers/answers.module';
+import { ChallengesModule } from './modules/challenges/challenges.module';
+import { AnswersModule } from './modules/answers/answers.module';
 
 @Module({
   imports: [

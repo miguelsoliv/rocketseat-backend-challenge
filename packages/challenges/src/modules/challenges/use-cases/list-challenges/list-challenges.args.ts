@@ -1,6 +1,6 @@
 import { ArgsType, Field } from '@nestjs/graphql';
 import { IsNotEmpty, IsOptional } from 'class-validator';
-import { PaginationArgs } from '../../../shared/dtos';
+import { PaginationArgs } from '@core/dtos';
 
 @ArgsType()
 export class ListChallengesArgs extends PaginationArgs {

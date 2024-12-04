@@ -22,12 +22,12 @@ export class PaginateQueryService {
       take: limit,
     });
 
-    const hasNextPage = total - (page * limit + docs.length);
+    const remainingDocsToShow = total - ((page - 1) * limit + docs.length);
 
     return {
       docs,
       total,
-      hasNextPage: hasNextPage >= 1,
+      hasNextPage: remainingDocsToShow >= 1,
     };
   }
 }

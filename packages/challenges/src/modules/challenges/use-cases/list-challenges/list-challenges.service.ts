@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { PaginateQueryService } from '../../../shared/services';
+import { PaginateQueryService } from '@core/services';
 import { ListChallengesArgs } from './list-challenges.args';
 
 @Injectable()
