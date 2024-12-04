@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { PrismaService } from '@infra/database/prisma.service';
+import { PaginateQueryService } from '../../../shared/services';
 import { ListChallengesArgs } from './list-challenges.args';
 
 @Injectable()
 export class ListChallengesService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly paginateQueryService: PaginateQueryService) {}
 
   async run({ description, limit, page, title }: ListChallengesArgs) {
     const query: Prisma.ChallengeWhereInput = {};
@@ -17,10 +17,11 @@ export class ListChallengesService {
       this.attachToQuery(query, { description: { contains: description } });
     }
 
-    return this.prismaService.challenge.findMany({
-      where: query,
-      skip: limit * (page - 1),
-      take: limit,
+    return this.paginateQueryService.run({
+      query,
+      model: 'challenge',
+      limit,
+      page,
     });
   }
 

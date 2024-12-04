@@ -4,7 +4,11 @@ import {
   AnswerChallengeInput,
   AnswerChallengeService,
 } from './use-cases/answer-challenge';
-import { ListAnswersArgs, ListAnswersService } from './use-cases/list-answers';
+import {
+  ListAnswersArgs,
+  ListAnswersService,
+  ListAnswersResponse,
+} from './use-cases/list-answers';
 
 @Resolver(() => Answer)
 export class AnswersResolver {
@@ -18,7 +22,7 @@ export class AnswersResolver {
     return this.answerChallengeService.run(data);
   }
 
-  @Query(() => [Answer])
+  @Query(() => ListAnswersResponse)
   async answers(@Args() data: ListAnswersArgs) {
     return this.listAnswersService.run(data);
   }

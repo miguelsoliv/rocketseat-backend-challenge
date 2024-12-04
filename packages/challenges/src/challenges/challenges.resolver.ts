@@ -7,6 +7,7 @@ import {
 } from './use-cases/create-challenge';
 import {
   ListChallengesArgs,
+  ListChallengesResponse,
   ListChallengesService,
 } from './use-cases/list-challenges';
 import { DeleteChallengeService } from './use-cases/delete-challenge';
@@ -39,7 +40,7 @@ export class ChallengesResolver {
     return this.updateChallengesService.run(data);
   }
 
-  @Query(() => [Challenge])
+  @Query(() => ListChallengesResponse)
   async challenges(@Args() data: ListChallengesArgs) {
     return this.listChallengesService.run(data);
   }

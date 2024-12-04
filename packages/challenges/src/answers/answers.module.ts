@@ -5,6 +5,7 @@ import { DatabaseModule } from '@infra/database/database.module';
 import { AnswersResolver } from './answers.resolver';
 import { AnswerChallengeService } from './use-cases/answer-challenge';
 import { ListAnswersService } from './use-cases/list-answers';
+import { PaginateQueryService } from '../shared/services';
 
 @Module({
   imports: [
@@ -24,7 +25,12 @@ import { ListAnswersService } from './use-cases/list-answers';
       },
     ]),
   ],
-  providers: [AnswersResolver, AnswerChallengeService, ListAnswersService],
+  providers: [
+    AnswersResolver,
+    AnswerChallengeService,
+    PaginateQueryService,
+    ListAnswersService,
+  ],
 })
 export class AnswersModule {
   constructor(

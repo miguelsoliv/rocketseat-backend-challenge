@@ -32,10 +32,18 @@ type Challenge {
   createdAt: DateTime!
 }
 
+type PaginatedAnswers {
+  docs: [Answer!]!
+  total: Int!
+  hasNextPage: Boolean!
+}
+
 type Query {
-  challenges(title: String, description: String, page: Int! = 1, limit: Int! = 10): [Challenge!]!
+  challenges(page: Int! = 1, limit: Int! = 10, title: String, description: String): [Challenge!]!
   answers(
-    challengeId: UUID!
+    page: Int! = 1
+    limit: Int! = 10
+    challengeId: UUID
     status: AnswerStatus
 
     """Min date to search for an answer"""
@@ -43,9 +51,7 @@ type Query {
 
     """Max date to search for an answer"""
     answeredEndAt: DateTime
-    page: Int! = 1
-    limit: Int! = 10
-  ): [Answer!]!
+  ): PaginatedAnswers!
 }
 
 type Mutation {

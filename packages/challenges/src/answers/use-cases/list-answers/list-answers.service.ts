@@ -1,21 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { PrismaService } from '@infra/database/prisma.service';
 import { ListAnswersArgs } from './list-answers.args';
+import { PaginateQueryService } from '../../../shared/services';
 
 @Injectable()
 export class ListAnswersService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly paginateQueryService: PaginateQueryService) {}
 
   async run({ challengeId, status, limit, page }: ListAnswersArgs) {
-    const query: Prisma.AnswerWhereInput = { challengeId };
+    const query: Prisma.AnswerWhereInput = {};
 
+    if (challengeId) this.attachToQuery(query, { challengeId });
     if (status) this.attachToQuery(query, { status });
 
-    return this.prismaService.answer.findMany({
-      where: query,
-      skip: limit * (page - 1),
-      take: limit,
+    return this.paginateQueryService.run({
+      query,
+      model: 'answer',
+      limit,
+      page,
     });
   }
 
