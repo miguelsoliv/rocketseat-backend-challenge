@@ -15,9 +15,9 @@ type Answer {
 scalar UUID
 
 enum AnswerStatus {
-  Pending
-  Error
-  Done
+  PENDING
+  ERROR
+  DONE
 }
 
 """

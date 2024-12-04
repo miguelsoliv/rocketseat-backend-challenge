@@ -19,9 +19,9 @@ model Challenge {
 }
 
 enum AnswerStatus {
-  Pending
-  Error
-  Done
+  PENDING
+  ERROR
+  DONE
 
   @@map("answer_status_enum")
 }
