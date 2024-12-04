@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { AnswerStatus } from '@prisma/client';
+// TODO: core dep
 import { UuidScalar } from '@core/scalars';
+import { AnswerStatus } from '@shared/constants';
 
 @ObjectType()
 export class Answer {
@@ -8,10 +9,10 @@ export class Answer {
   id: string;
 
   @Field(() => UuidScalar)
-  challengeId: string;
+  challengeId?: string;
 
   @Field()
-  repositoryUrl: string;
+  repositoryUrl?: string;
 
   @Field(() => AnswerStatus)
   status: AnswerStatus;

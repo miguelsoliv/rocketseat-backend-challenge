@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { PaginateQueryService } from '@infra/services/paginate-query.service';
 import { ListAnswersArgs } from './list-answers.args';
-import { PaginateQueryService } from '@core/services';
 
 @Injectable()
 export class ListAnswersService {

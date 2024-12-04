@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ChallengeNotFound, TitleAlreadyTaken } from '@core/errors';
-import { PrismaService } from '@infra/database/prisma.service';
+import { PrismaService } from '@infra/services/prisma.service';
+import { ChallengeNotFound } from '@shared/errors';
+import { TitleAlreadyTaken } from '../../errors';
 import { UpdateChallengeInput } from './update-challenge.input';
 
 @Injectable()

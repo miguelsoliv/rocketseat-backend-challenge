@@ -1,5 +1,5 @@
-import { PrismaService } from '@infra/database/prisma.service';
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from './prisma.service';
 
 interface PaginateQueryRequest<T> {
   query: T;

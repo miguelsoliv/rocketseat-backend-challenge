@@ -1,10 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
-import { AnswerStatus } from '@prisma/client';
 import axios from 'axios';
 import { firstValueFrom } from 'rxjs';
-import { ChallengeNotFound, InvalidRepositoryUrlError } from '@core/errors';
-import { PrismaService } from '@infra/database/prisma.service';
+import { PrismaService } from '@infra/services/prisma.service';
+import { AnswerStatus } from '@shared/constants';
+import { ChallengeNotFound } from '@shared/errors';
+import { InvalidRepositoryUrlError } from '../../errors';
 import { AnswerChallengeInput } from './answer-challenge.input';
 
 @Injectable()
@@ -26,7 +27,7 @@ export class AnswerChallengeService {
 
     if (!challenge || !isValidRepoUrl) {
       await this.prismaService.answer.create({
-        data: { grade: 0, status: AnswerStatus.Error },
+        data: { grade: 0, status: AnswerStatus.ERROR },
       });
 
       throw challenge
@@ -37,12 +38,13 @@ export class AnswerChallengeService {
     const answer = await this.prismaService.answer.create({
       data: {
         grade: 0,
-        status: AnswerStatus.Pending,
+        status: AnswerStatus.PENDING,
         repositoryUrl: data.repositoryUrl,
         challengeId: data.challengeId,
       },
     });
 
+    // TODO: abstract to service
     const answerWithGrade = await firstValueFrom(
       this.kafka.send<
         { grade: number; status: AnswerStatus },

@@ -1,15 +1,14 @@
 import { Inject, Module } from '@nestjs/common';
 import { ClientKafka, ClientsModule, Transport } from '@nestjs/microservices';
 import { Partitioners } from 'kafkajs';
-import { DatabaseModule } from '@infra/database/database.module';
-import { PaginateQueryService } from '@core/services';
+import { InfraModule } from '@infra/infra.module';
 import { AnswersResolver } from './answers.resolver';
 import { AnswerChallengeService } from './use-cases/answer-challenge';
 import { ListAnswersService } from './use-cases/list-answers';
 
 @Module({
   imports: [
-    DatabaseModule,
+    InfraModule,
     ClientsModule.register([
       {
         name: 'CHALLENGES_SERVICE',
@@ -25,12 +24,7 @@ import { ListAnswersService } from './use-cases/list-answers';
       },
     ]),
   ],
-  providers: [
-    AnswersResolver,
-    AnswerChallengeService,
-    PaginateQueryService,
-    ListAnswersService,
-  ],
+  providers: [AnswersResolver, AnswerChallengeService, ListAnswersService],
 })
 export class AnswersModule {
   constructor(

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ChallengeNotFound } from '@core/errors';
-import { PrismaService } from '@infra/database/prisma.service';
+import { PrismaService } from '@infra/services/prisma.service';
+import { ChallengeNotFound } from '@shared/errors';
 
 @Injectable()
 export class DeleteChallengeService {

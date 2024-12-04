@@ -1,8 +1,8 @@
 import { ArgsType, Field } from '@nestjs/graphql';
-import { AnswerStatus } from '@prisma/client';
 import { IsDate, IsEnum, IsNotEmpty, IsOptional } from 'class-validator';
 import { UuidScalar } from '@core/scalars';
-import { PaginationArgs } from '@core/dtos';
+import { AnswerStatus } from '@shared/constants';
+import { PaginationArgs } from '@shared/dtos';
 
 @ArgsType()
 export class ListAnswersArgs extends PaginationArgs {
