@@ -1,34 +1,28 @@
-import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { PaginateQueryService } from '@infra/services/paginate-query.service';
+import { Inject, Injectable } from '@nestjs/common';
+import {
+  ChallengeRepository,
+  CHALLENGE_REPOSITORY_TOKEN,
+} from '@core/repositories/challenge.repository';
 import { ListChallengesArgs } from './list-challenges.args';
+import { ListChallengesResponse } from './list-challenges.response';
 
 @Injectable()
 export class ListChallengesService {
-  constructor(private readonly paginateQueryService: PaginateQueryService) {}
+  constructor(
+    @Inject(CHALLENGE_REPOSITORY_TOKEN)
+    private readonly challengeRepo: ChallengeRepository,
+  ) {}
 
-  async run({ description, limit, page, title }: ListChallengesArgs) {
-    const query: Prisma.ChallengeWhereInput = {};
-
-    if (title) {
-      this.attachToQuery(query, { title: { contains: title } });
-    }
-    if (description) {
-      this.attachToQuery(query, { description: { contains: description } });
-    }
-
-    return this.paginateQueryService.run({
-      query,
-      model: 'challenge',
+  async run({
+    description,
+    limit,
+    page,
+    title,
+  }: ListChallengesArgs): Promise<ListChallengesResponse> {
+    return this.challengeRepo.listPaginated({
+      queryFields: { description, title },
       limit,
       page,
     });
-  }
-
-  private attachToQuery(
-    query: Prisma.ChallengeWhereInput,
-    clause: Prisma.ChallengeWhereInput,
-  ) {
-    Object.assign(query, clause);
   }
 }

@@ -1,64 +1,58 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ClientKafka } from '@nestjs/microservices';
 import axios from 'axios';
-import { firstValueFrom } from 'rxjs';
-import { PrismaService } from '@infra/services/prisma.service';
 import { AnswerStatus } from '@shared/constants';
 import { ChallengeNotFound } from '@shared/errors';
+import {
+  ANSWER_REPOSITORY_TOKEN,
+  AnswerRepository,
+} from '@core/repositories/answer.repository';
 import { InvalidRepositoryUrlError } from '../../errors';
 import { AnswerChallengeInput } from './answer-challenge.input';
+import {
+  CHALLENGE_REPOSITORY_TOKEN,
+  ChallengeRepository,
+} from '@core/repositories/challenge.repository';
+import { KafkaService } from '@infra/events-handler/kafka.service';
 
 @Injectable()
 export class AnswerChallengeService {
   constructor(
-    private readonly prismaService: PrismaService,
-    @Inject('CHALLENGES_SERVICE')
-    private readonly kafka: ClientKafka,
+    private readonly kafkaService: KafkaService,
+    @Inject(ANSWER_REPOSITORY_TOKEN)
+    private readonly answerRepo: AnswerRepository,
+    @Inject(CHALLENGE_REPOSITORY_TOKEN)
+    private readonly challengeRepo: ChallengeRepository,
   ) {}
 
   async run(data: AnswerChallengeInput) {
-    const challenge = await this.prismaService.challenge.findFirst({
-      where: { id: data.challengeId },
-    });
+    const challenge = await this.challengeRepo.findById(data.challengeId);
 
     const isValidRepoUrl = await this.checkForValidGithubUrl(
       data.repositoryUrl,
     );
 
     if (!challenge || !isValidRepoUrl) {
-      await this.prismaService.answer.create({
-        data: { grade: 0, status: AnswerStatus.ERROR },
-      });
+      await this.answerRepo.save({ grade: 0, status: AnswerStatus.ERROR });
 
       throw challenge
         ? new InvalidRepositoryUrlError()
         : new ChallengeNotFound();
     }
 
-    const answer = await this.prismaService.answer.create({
-      data: {
-        grade: 0,
-        status: AnswerStatus.PENDING,
-        repositoryUrl: data.repositoryUrl,
-        challengeId: data.challengeId,
-      },
+    const answer = await this.answerRepo.save({
+      grade: 0,
+      status: AnswerStatus.PENDING,
+      repositoryUrl: data.repositoryUrl,
+      challengeId: data.challengeId,
     });
 
-    // TODO: abstract to service
-    const answerWithGrade = await firstValueFrom(
-      this.kafka.send<
-        { grade: number; status: AnswerStatus },
-        { submissionId: string; repositoryUrl: string }
-      >('challenge.correction', {
+    const { grade, status } =
+      await this.kafkaService.triggerChallengeAnsweredEvent({
         submissionId: answer.id,
         repositoryUrl: data.repositoryUrl,
-      }),
-    );
+      });
 
-    return this.prismaService.answer.update({
-      where: { id: answer.id },
-      data: { grade: answerWithGrade.grade, status: answerWithGrade.status },
-    });
+    return this.answerRepo.update({ id: answer.id, grade, status });
   }
 
   private async checkForValidGithubUrl(repoUrl: string) {

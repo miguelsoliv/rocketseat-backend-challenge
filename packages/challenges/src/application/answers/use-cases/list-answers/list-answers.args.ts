@@ -1,6 +1,6 @@
 import { ArgsType, Field } from '@nestjs/graphql';
 import { IsDate, IsEnum, IsNotEmpty, IsOptional } from 'class-validator';
-import { UuidScalar } from '@core/scalars';
+import { UuidScalar } from '@shared/scalars';
 import { AnswerStatus } from '@shared/constants';
 import { PaginationArgs } from '@shared/dtos';
 

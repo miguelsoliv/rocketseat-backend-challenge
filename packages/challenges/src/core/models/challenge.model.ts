@@ -1,6 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-// TODO: core dep
-import { UuidScalar } from '@core/scalars';
+import { UuidScalar } from '@shared/scalars';
 
 @ObjectType()
 export class Challenge {

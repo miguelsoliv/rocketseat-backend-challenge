@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsNotEmpty, IsOptional } from 'class-validator';
-import { UuidScalar } from '@core/scalars';
+import { UuidScalar } from '@shared/scalars';
 
 @InputType()
 export class UpdateChallengeInput {

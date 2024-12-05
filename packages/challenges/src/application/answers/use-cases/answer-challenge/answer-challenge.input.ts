@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsNotEmpty, IsUrl } from 'class-validator';
-import { UuidScalar } from '@core/scalars';
+import { UuidScalar } from '@shared/scalars';
 
 @InputType()
 export class AnswerChallengeInput {

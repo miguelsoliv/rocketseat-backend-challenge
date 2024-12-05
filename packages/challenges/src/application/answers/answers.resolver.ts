@@ -1,5 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Answer } from '@infra/models';
+import { Answer } from '@core/models';
 import {
   AnswerChallengeInput,
   AnswerChallengeService,

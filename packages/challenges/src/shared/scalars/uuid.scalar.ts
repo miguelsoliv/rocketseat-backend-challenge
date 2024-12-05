@@ -1,6 +1,6 @@
 import { GraphQLScalarType } from 'graphql';
 import { isUUID } from 'class-validator';
-import { InvalidUUID } from '@core/errors';
+import { InvalidUUID } from '../errors';
 
 const validate = (uuid: unknown) => {
   if (!isUUID(uuid)) throw new InvalidUUID();

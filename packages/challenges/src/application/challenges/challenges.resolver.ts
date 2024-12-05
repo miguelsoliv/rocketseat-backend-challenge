@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { UuidScalar } from '@core/scalars';
-import { Challenge } from '@infra/models';
+import { UuidScalar } from '@shared/scalars';
+import { Challenge } from '@core/models';
 import {
   CreateChallengeInput,
   CreateChallengeService,

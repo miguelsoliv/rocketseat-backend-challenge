@@ -12,6 +12,19 @@ Serviço que gerencia os desafios enviados pelos alunos
 No decorrer do desenvolvimento, optei por seguir alguns caminhos baseado no contexto e complexidade do projeto
 
 <details>
+  <summary><strong>Arquitetura</strong></summary>
+
+  É um ponto que varia muito dependendo do projeto e do time envolvido. No fim, existem diversas arquiteturas e devemos sempre lembrar que os princípios da arquitetura de software não estão escritos em pedra. Mesmo que uma arquitetura X seja escolhida, não precisamos seguir 100% dos princípios que ela trás. Podemos nos basear nessa arquitetura pra criarmos uma que se encaixe melhor no contexto do projeto (seja simplificando ela ou unindo ela com uma arquitetura Y)
+
+  #### Abordagem
+  Utilizei DDD e optei por criar uma estrutura mais simplista, mas ainda seguindo os princípios do DDD:
+  - `application/`: serve basicamente para fazer a validação dos inputs do usuário e criar os contratos de request/response. Apenas realiza chamadas para os serviços da `infra` ou para as abstrações da `core`
+  - `core/`: centralização das models, contratos dos repositories e ...?. Apenas os códigos da `shared/` podem ser importados
+  - `infra/`: códigos de persistência de dados (interação com db e implementação dos repositories) e integração com libs externas (nesse projeto, Kafka)
+  - `shared/`: utilitários globais que podem ser chamados pelos outros módulos (`application`, `core`, e `infra`) e que podem facilmente ser extraídos para outros projetos. Eles não possuem acoplamento, então **não podem** importar códigos de outros módulos
+</details>
+
+<details>
   <summary><strong>ORM</strong></summary>
 
   ORMs facilitam o desenvolvimento (principalmente pela tipagem, criação de seeds ou até mesmo por abstraírem o uso do SQL caso o dev não esteja muito familiarizado) e arquitetura do banco (com o uso de migrations)

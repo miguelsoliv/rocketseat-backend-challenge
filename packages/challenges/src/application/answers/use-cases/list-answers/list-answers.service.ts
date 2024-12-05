@@ -1,30 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { PaginateQueryService } from '@infra/services/paginate-query.service';
+import { Inject, Injectable } from '@nestjs/common';
+import {
+  ANSWER_REPOSITORY_TOKEN,
+  AnswerRepository,
+} from '@core/repositories/answer.repository';
 import { ListAnswersArgs } from './list-answers.args';
 
 @Injectable()
 export class ListAnswersService {
-  constructor(private readonly paginateQueryService: PaginateQueryService) {}
+  constructor(
+    @Inject(ANSWER_REPOSITORY_TOKEN)
+    private readonly answerRepo: AnswerRepository,
+  ) {}
 
   async run({ challengeId, status, limit, page }: ListAnswersArgs) {
-    const query: Prisma.AnswerWhereInput = {};
-
-    if (challengeId) this.attachToQuery(query, { challengeId });
-    if (status) this.attachToQuery(query, { status });
-
-    return this.paginateQueryService.run({
-      query,
-      model: 'answer',
+    return this.answerRepo.listPaginated({
+      queryFields: { challengeId, status },
       limit,
       page,
     });
-  }
-
-  private attachToQuery(
-    query: Prisma.AnswerWhereInput,
-    clause: Prisma.AnswerWhereInput,
-  ) {
-    Object.assign(query, clause);
   }
 }
