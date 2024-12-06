@@ -1,18 +1,20 @@
 import { Module } from '@nestjs/common';
-import { CHALLENGE_REPOSITORY_TOKEN } from '@core/repositories/challenge.repository';
-import { ANSWER_REPOSITORY_TOKEN } from '@core/repositories/answer.repository';
-import { ChallengeRepositoryPrisma } from './repositories/challenge-repository.prisma';
-import { AnswerRepositoryPrisma } from './repositories/answer-repository.prisma';
+import { CHALLENGES_REPOSITORY_TOKEN } from '@core/repositories/challenges';
+import { ANSWERS_REPOSITORY_TOKEN } from '@core/repositories/answers';
+import {
+  AnswerRepositoryPrisma,
+  ChallengeRepositoryPrisma,
+} from './database/repositories';
 import { PaginateQueryService } from './services/paginate-query.service';
 import { PrismaService } from './services/prisma.service';
 
 const repoClasses = [
   {
-    provide: CHALLENGE_REPOSITORY_TOKEN,
+    provide: CHALLENGES_REPOSITORY_TOKEN,
     useClass: ChallengeRepositoryPrisma,
   },
   {
-    provide: ANSWER_REPOSITORY_TOKEN,
+    provide: ANSWERS_REPOSITORY_TOKEN,
     useClass: AnswerRepositoryPrisma,
   },
 ];

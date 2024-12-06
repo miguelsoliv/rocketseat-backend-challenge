@@ -1,20 +1,18 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UuidScalar } from '@shared/scalars';
-import { Challenge } from '@core/models';
+import { Challenge } from '@core/challenges/challenge.model';
+import {
+  CreateChallengeService,
+  DeleteChallengeService,
+  ListChallengesService,
+  UpdateChallengeService,
+} from '@core/challenges/services';
 import {
   CreateChallengeInput,
-  CreateChallengeService,
-} from './use-cases/create-challenge';
-import {
   ListChallengesArgs,
   ListChallengesResponse,
-  ListChallengesService,
-} from './use-cases/list-challenges';
-import { DeleteChallengeService } from './use-cases/delete-challenge';
-import {
   UpdateChallengeInput,
-  UpdateChallengeService,
-} from './use-cases/update-challenge';
+} from './dtos';
 
 @Resolver(() => Challenge)
 export class ChallengesResolver {
@@ -26,22 +24,30 @@ export class ChallengesResolver {
   ) {}
 
   @Mutation(() => Challenge)
-  async createChallenge(@Args('data') data: CreateChallengeInput) {
+  async createChallenge(
+    @Args('data') data: CreateChallengeInput,
+  ): Promise<Challenge> {
     return this.createChallengeService.run(data);
   }
 
   @Mutation(() => Challenge)
-  async deleteChallenge(@Args('id', { type: () => UuidScalar }) id: string) {
+  async deleteChallenge(
+    @Args('id', { type: () => UuidScalar }) id: string,
+  ): Promise<Challenge> {
     return this.deleteChallengeService.run(id);
   }
 
   @Mutation(() => Challenge)
-  async updateChallenge(@Args('data') data: UpdateChallengeInput) {
+  async updateChallenge(
+    @Args('data') data: UpdateChallengeInput,
+  ): Promise<Challenge> {
     return this.updateChallengesService.run(data);
   }
 
   @Query(() => ListChallengesResponse)
-  async challenges(@Args() data: ListChallengesArgs) {
+  async challenges(
+    @Args() data: ListChallengesArgs,
+  ): Promise<ListChallengesResponse> {
     return this.listChallengesService.run(data);
   }
 }

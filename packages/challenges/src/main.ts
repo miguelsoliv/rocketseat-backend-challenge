@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { registerEnumType } from '@nestjs/graphql';
-import { env } from './infra/config';
+import { env } from './shared/config';
 import { AnswerStatus } from './shared/constants';
 import { AppModule } from './app.module';
 

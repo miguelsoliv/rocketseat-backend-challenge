@@ -2,6 +2,27 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Challenge {
+  id: UUID!
+  title: String!
+  description: String!
+  createdAt: DateTime!
+}
+
+"""UUID validator"""
+scalar UUID
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type ListChallengesResponse {
+  docs: [Challenge!]!
+  total: Int!
+  hasNextPage: Boolean!
+}
+
 type Answer {
   id: UUID!
   challengeId: UUID!
@@ -11,31 +32,10 @@ type Answer {
   createdAt: DateTime!
 }
 
-"""UUID validator"""
-scalar UUID
-
 enum AnswerStatus {
   PENDING
   ERROR
   DONE
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type Challenge {
-  id: UUID!
-  title: String!
-  description: String!
-  createdAt: DateTime!
-}
-
-type ListChallengesResponse {
-  docs: [Challenge!]!
-  total: Int!
-  hasNextPage: Boolean!
 }
 
 type ListAnswersResponse {
