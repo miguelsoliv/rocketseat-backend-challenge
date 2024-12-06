@@ -9,7 +9,7 @@ import { PaginateQueryService } from '../../services/paginate-query.service';
 import { PrismaService } from '../../services/prisma.service';
 
 @Injectable()
-export class AnswerRepositoryPrisma implements AnswersRepository {
+export class AnswersRepositoryPrisma implements AnswersRepository {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly paginateQueryService: PaginateQueryService,

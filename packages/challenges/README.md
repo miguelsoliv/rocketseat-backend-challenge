@@ -40,6 +40,14 @@ No decorrer do desenvolvimento, optei por seguir alguns caminhos baseado no cont
 </details>
 
 <details>
+  <summary><strong>Testes</strong></summary>
+
+  #### Abordagem
+  - testes unitários: apenas services da pasta core (é onde ficam as regras de negócio, então vi sentido em criar testes apenas pra esses caras)
+  - [TODO] testes E2E: fluxo completo, desde a requisição de uma query até a validação do retorno da API
+</details>
+
+<details>
   <summary><strong>Paginação</strong></summary>
 
   A abordagem da paginação depende do projeto. Podemos seguir com a mais conhecida (usando offset e limit) ou com cursores (que é um caso de uso bem diferente, sendo ideal pra infinite scroll mas impossibilitando o usuário de pular da página 2 pra 10 por não sabermos o valor do cursor da página 10)

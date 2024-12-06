@@ -1,2 +1,2 @@
-export * from './answer-repository.prisma';
-export * from './challenge-repository.prisma';
+export * from './answers.repository.prisma';
+export * from './challenges.repository.prisma';

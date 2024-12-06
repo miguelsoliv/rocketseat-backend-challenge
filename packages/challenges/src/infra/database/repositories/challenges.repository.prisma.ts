@@ -8,7 +8,7 @@ import { PrismaService } from '../../services/prisma.service';
 import { PaginateQueryService } from '../../services/paginate-query.service';
 
 @Injectable()
-export class ChallengeRepositoryPrisma implements ChallengesRepository {
+export class ChallengesRepositoryPrisma implements ChallengesRepository {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly paginateQueryService: PaginateQueryService,
