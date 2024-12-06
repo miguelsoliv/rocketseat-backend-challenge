@@ -33,11 +33,19 @@ export class AnswerRepositoryPrisma implements AnswersRepository {
     limit,
     page,
   }: ListPaginatedAnswersRequestDto) {
-    const { challengeId, status } = queryFields;
+    const { challengeId, status, answeredEndAt, answeredStartAt } = queryFields;
     const query: Prisma.AnswerWhereInput = {};
 
     if (challengeId) this.attachFieldToQuery(query, { challengeId });
     if (status) this.attachFieldToQuery(query, { status });
+    if (answeredStartAt || answeredEndAt) {
+      const startAtFilter = answeredStartAt && { gte: answeredStartAt };
+      const endAtFilter = answeredEndAt && { lte: answeredEndAt };
+
+      this.attachFieldToQuery(query, {
+        createdAt: { ...startAtFilter, ...endAtFilter },
+      });
+    }
 
     return this.paginateQueryService.run({
       query,

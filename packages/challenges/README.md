@@ -2,11 +2,12 @@
 Serviço que gerencia os desafios enviados pelos alunos
 
 ### Primeiros passos
-- Rodar o docker para criação dos serviços e banco: `docker-compose up -d`
-- Instalar as dependências: `yarn`
-- Criar o arquivo `.env` com o mesmo conteúdo do `.env.example`, alterando apenas as configurações que julgar necessário
-- Gerar as tipagens do Prisma: `yarn prisma:generate`
-- Rodar o projeto em modo de desenvolvimento: `yarn dev`
+1. Rodar o docker para criação dos serviços e banco: `docker-compose up -d`
+2. Instalar as dependências: `yarn`
+3. Criar o arquivo `.env` com o mesmo conteúdo do `.env.example`, alterando apenas as configurações que julgar necessário
+4. Gerar as tipagens do Prisma: `yarn prisma:generate`
+5. Rodar as migrations: `yarn prisma:migrations:run`
+6. Rodar o projeto em modo de desenvolvimento: `yarn dev`
 
 ### Decisões
 No decorrer do desenvolvimento, optei por seguir alguns caminhos baseado no contexto e complexidade do projeto
@@ -89,4 +90,5 @@ No decorrer do desenvolvimento, optei por seguir alguns caminhos baseado no cont
 ### Disclaimer
 
 - Sempre opto por criar esse tipo de documentação em inglês, mas segui com o português apenas por ser um projeto desenvolvido para teste
+- Acabei fazendo commits com o escopo "challenge" (no caso, o serviço de challenges), mas decidi parar depois. Por ser um "monorepo", a ideia era explicitar a relação do commit com o serviço alterado, mas por ser um teste eu deveria apenas ter referenciado a entidade (challenge ou answer) que eu estava lidando (`fix(answers): answer challenge logic` ao invés de `fix(challenge): answer challenge logic`)
 - Mesmo sendo um teste, sugestões/dúvias são bem-vindas!
