@@ -25,17 +25,17 @@ type ListChallengesResponse {
 
 type Answer {
   id: UUID!
-  challengeId: UUID!
-  repositoryUrl: String!
+  challengeId: UUID
+  repositoryUrl: String
   status: AnswerStatus!
   grade: Int!
   createdAt: DateTime!
 }
 
 enum AnswerStatus {
-  PENDING
-  ERROR
-  DONE
+  Pending
+  Error
+  Done
 }
 
 type ListAnswersResponse {

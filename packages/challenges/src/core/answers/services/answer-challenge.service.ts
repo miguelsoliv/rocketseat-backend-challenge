@@ -32,7 +32,7 @@ export class AnswerChallengeService {
     );
 
     if (!challenge || !isValidRepoUrl) {
-      await this.answersRepo.save({ grade: 0, status: AnswerStatus.ERROR });
+      await this.answersRepo.save({ grade: 0, status: AnswerStatus.Error });
 
       throw challenge
         ? new InvalidRepositoryUrlError()
@@ -41,7 +41,7 @@ export class AnswerChallengeService {
 
     const answer = await this.answersRepo.save({
       grade: 0,
-      status: AnswerStatus.PENDING,
+      status: AnswerStatus.Pending,
       repositoryUrl: data.repositoryUrl,
       challengeId: data.challengeId,
     });

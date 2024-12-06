@@ -7,10 +7,10 @@ export class Answer {
   @Field(() => UuidScalar)
   id: string;
 
-  @Field(() => UuidScalar)
+  @Field(() => UuidScalar, { nullable: true })
   challengeId?: string;
 
-  @Field()
+  @Field({ nullable: true })
   repositoryUrl?: string;
 
   @Field(() => AnswerStatus)

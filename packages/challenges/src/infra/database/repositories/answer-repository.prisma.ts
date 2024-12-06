@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Answer } from '@core/answers/answer.model';
 import { AnswersRepository } from '@core/repositories/answers';
-import { PaginateDataDto } from '@core/repositories/common';
+import { ListPaginatedAnswersRequestDto } from '@core/repositories/answers/list-paginated-answers-request.dto';
 import { UpdateAnswerRequestDto } from '@core/repositories/answers/update-answer-request.dto';
 import { CreateAnswerRequestDto } from '@core/repositories/answers/create-answer-request.dto';
 import { PaginateQueryService } from '../../services/paginate-query.service';
@@ -28,7 +28,11 @@ export class AnswerRepositoryPrisma implements AnswersRepository {
     return model as Answer;
   }
 
-  async listPaginated({ queryFields, limit, page }: PaginateDataDto<Answer>) {
+  async listPaginated({
+    queryFields,
+    limit,
+    page,
+  }: ListPaginatedAnswersRequestDto) {
     const { challengeId, status } = queryFields;
     const query: Prisma.AnswerWhereInput = {};
 

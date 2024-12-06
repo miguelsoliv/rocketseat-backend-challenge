@@ -1,5 +1,5 @@
 export enum AnswerStatus {
-  PENDING = 'PENDING',
-  ERROR = 'ERROR',
-  DONE = 'DONE',
+  Pending = 'Pending',
+  Error = 'Error',
+  Done = 'Done',
 }

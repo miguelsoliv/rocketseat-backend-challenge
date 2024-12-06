@@ -12,9 +12,16 @@ export class ListAnswersService {
     private readonly answerRepo: AnswersRepository,
   ) {}
 
-  async run({ challengeId, status, limit, page }: ListAnswersDto) {
+  async run({
+    challengeId,
+    status,
+    answeredEndAt,
+    answeredStartAt,
+    limit,
+    page,
+  }: ListAnswersDto) {
     return this.answerRepo.listPaginated({
-      queryFields: { challengeId, status },
+      queryFields: { challengeId, status, answeredEndAt, answeredStartAt },
       limit,
       page,
     });

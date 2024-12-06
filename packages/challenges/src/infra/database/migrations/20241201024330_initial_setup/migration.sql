@@ -2,7 +2,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- CreateEnum
-CREATE TYPE "answer_status_enum" AS ENUM ('PENDING', 'ERROR', 'DONE');
+CREATE TYPE "answer_status_enum" AS ENUM ('Pending', 'Error', 'Done');
 
 -- CreateTable
 CREATE TABLE "challenges" (

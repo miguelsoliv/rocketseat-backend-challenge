@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { Challenge } from '@core/challenges/challenge.model';
 import { ChallengesRepository } from '@core/repositories/challenges';
-import { PaginateDataDto } from '@core/repositories/common';
+import { ListPaginatedChallengesRequestDto } from '@core/repositories/challenges/list-paginated-challenges-request.dto';
 import { CreateChallengeRequestDto } from '@core/repositories/challenges/create-challenge-request.dto';
 import { UpdateChallengeRequestDto } from '@core/repositories/challenges/update-challenge-request.dto';
 import { PrismaService } from '../../services/prisma.service';
@@ -42,7 +41,7 @@ export class ChallengeRepositoryPrisma implements ChallengesRepository {
     queryFields,
     limit,
     page,
-  }: PaginateDataDto<Challenge>) {
+  }: ListPaginatedChallengesRequestDto) {
     const { description, title } = queryFields;
     const query: Prisma.ChallengeWhereInput = {};
 
