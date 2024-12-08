@@ -6,8 +6,8 @@ import {
 } from '@core/challenges/services';
 import { CHALLENGES_REPOSITORY_TOKEN } from '@core/repositories/challenges';
 import { PaginationResponseDto } from '@shared/dtos';
-import { ChallengesRepositoryFake } from '../fakes';
-import { createFakeChallenges } from '../factories';
+import { ChallengesRepositoryFake } from '../../fakes';
+import { createFakeChallenges } from '../../factories';
 
 describe('ListChallengesService', () => {
   let createService: CreateChallengeService;

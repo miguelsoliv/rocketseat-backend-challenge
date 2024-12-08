@@ -58,15 +58,22 @@ export class ChallengesRepositoryFake implements ChallengesRepository {
   }: ListPaginatedChallengesRequestDto) {
     const { description, title } = queryFields;
 
+    const createFiltersConditions = (
+      challenge: Challenge,
+    ): Record<keyof typeof queryFields, boolean> => ({
+      title: challenge.title.includes(title),
+      description: challenge.description.includes(description),
+    });
+
     const docs = this.challenges.filter((challenge) => {
-      if (!title && !description) return true;
+      if (!queryFields) return true;
 
-      const searchForTitle = challenge.title.includes(title);
-      const searchForDescription = challenge.description.includes(description);
+      const filtersConditions = createFiltersConditions(challenge);
 
-      if (title && description) return searchForTitle && searchForDescription;
-      if (title) return searchForTitle;
-      if (description) return searchForDescription;
+      return Object.entries(queryFields).every(([filterKey, filterValue]) => {
+        if (!filterValue) return true;
+        return filtersConditions[filterKey];
+      });
     });
 
     const total = this.challenges.length;

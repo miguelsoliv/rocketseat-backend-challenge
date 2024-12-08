@@ -4,8 +4,8 @@ import { Challenge } from '@core/challenges/challenge.model';
 import { CreateChallengeService } from '@core/challenges/services';
 import { TitleAlreadyTaken } from '@core/challenges/errors';
 import { CHALLENGES_REPOSITORY_TOKEN } from '@core/repositories/challenges';
-import { ChallengesRepositoryFake } from '../fakes';
-import { createFakeChallenges } from '../factories';
+import { ChallengesRepositoryFake } from '../../fakes';
+import { createFakeChallenges } from '../../factories';
 
 describe('CreateChallengeService', () => {
   let createService: CreateChallengeService;
