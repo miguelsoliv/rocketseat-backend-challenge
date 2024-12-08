@@ -20,7 +20,7 @@ No decorrer do desenvolvimento, optei por seguir alguns caminhos baseado no cont
   #### Abordagem
   Utilizei DDD e optei por criar uma estrutura mais simplista, mas ainda seguindo os princípios do DDD:
   - `application/`: serve para fazer a validação dos inputs do usuário e criar os contratos de request/response, além de unir os serviços do core e infra nos respectivos arquivos `.module`
-  - `core/`: centralização das models, contratos dos repositories e serviços contendo as regras de negócio. Basicamente aqui só existem regras de negócio e chamadas pros serviços da infra
+  - `core/`: centralização das models, contratos de implementação (repositories e event handlers), serviços contendo as regras de negócio e chamadas pros serviços da infra
   - `infra/`: códigos de implementação dos repositories (interação com db) e integração com libs externas (nesse projeto, Kafka)
   - `shared/`: utilitários globais que podem ser chamados pelos outros módulos (application, core, e infra) e que podem facilmente ser extraídos para outros projetos. Eles não possuem acoplamento, então **não podem** importar código de outros módulos
 </details>

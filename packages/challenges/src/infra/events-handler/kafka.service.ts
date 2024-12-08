@@ -1,12 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { catchError, firstValueFrom, throwError, timeout } from 'rxjs';
+import { ChallengeAnsweredEvent, CorrectedAnswerEvent } from '@core/events';
+import { EventsHandler } from '@core/events/events-handler';
 import { KafkaTimeoutError } from '../errors';
 import { EVENT_HANDLER_TOKEN } from './events-handler.constants';
-import { ChallengeAnsweredEvent, CorrectedAnswerEvent } from './events';
 
 @Injectable()
-export class KafkaService {
+export class KafkaService implements EventsHandler {
   constructor(
     @Inject(EVENT_HANDLER_TOKEN)
     private readonly kafka: ClientKafka,
