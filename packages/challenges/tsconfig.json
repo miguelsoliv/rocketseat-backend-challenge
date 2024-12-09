@@ -3,6 +3,7 @@
 	"compilerOptions": {
 		"outDir": "./dist",
 		"baseUrl": "./",
+		"skipLibCheck": true,
 		"paths": {
       "@core/*": ["src/core/*"],
       "@infra/*": ["src/infra/*"],

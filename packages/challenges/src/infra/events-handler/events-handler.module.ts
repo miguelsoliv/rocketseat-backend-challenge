@@ -1,15 +1,19 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { Partitioners } from 'kafkajs';
+import { EVENTS_HANDLER_TOKEN } from '@core/events/events-handler';
 import { KafkaService } from './kafka.service';
+import { KAFKA_MODULE_TOKEN } from './kafka.constants';
 
-export const EVENT_HANDLER_TOKEN = 'EVENT_HANDLER';
+const kafkaService = [
+  { provide: EVENTS_HANDLER_TOKEN, useClass: KafkaService },
+];
 
 @Module({
   imports: [
     ClientsModule.register([
       {
-        name: EVENT_HANDLER_TOKEN,
+        name: KAFKA_MODULE_TOKEN,
         transport: Transport.KAFKA,
         options: {
           producer: { createPartitioner: Partitioners.DefaultPartitioner },
@@ -22,7 +26,7 @@ export const EVENT_HANDLER_TOKEN = 'EVENT_HANDLER';
       },
     ]),
   ],
-  providers: [KafkaService],
-  exports: [KafkaService],
+  providers: kafkaService,
+  exports: kafkaService,
 })
 export class EventsHandlerModule {}

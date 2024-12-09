@@ -4,12 +4,12 @@ import { catchError, firstValueFrom, throwError, timeout } from 'rxjs';
 import { ChallengeAnsweredEvent, CorrectedAnswerEvent } from '@core/events';
 import { EventsHandler } from '@core/events/events-handler';
 import { KafkaTimeoutError } from './errors';
-import { EVENT_HANDLER_TOKEN } from './events-handler.module';
+import { KAFKA_MODULE_TOKEN } from './kafka.constants';
 
 @Injectable()
 export class KafkaService implements OnModuleInit, EventsHandler {
   constructor(
-    @Inject(EVENT_HANDLER_TOKEN)
+    @Inject(KAFKA_MODULE_TOKEN)
     private readonly kafka: ClientKafka,
   ) {}
 

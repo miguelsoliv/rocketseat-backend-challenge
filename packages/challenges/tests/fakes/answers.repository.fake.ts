@@ -47,8 +47,9 @@ export class AnswersRepositoryFake implements AnswersRepository {
       answer: Answer,
     ): Record<keyof typeof queryFields, boolean> => {
       const startAtFilter =
-        answer.createdAt.getTime() >= answeredStartAt.getTime();
-      const endAtFilter = answer.createdAt.getTime() <= answeredEndAt.getTime();
+        answer.createdAt.getTime() >= answeredStartAt?.getTime();
+      const endAtFilter =
+        answer.createdAt.getTime() <= answeredEndAt?.getTime();
 
       return {
         answeredStartAt: startAtFilter,

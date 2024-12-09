@@ -2,7 +2,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { AnswerStatus } from '@shared/constants';
 import { ChallengeNotFound } from '@shared/errors';
-import { KafkaService } from '@infra/events-handler/kafka.service';
+import {
+  EVENTS_HANDLER_TOKEN,
+  EventsHandler,
+} from '../../events/events-handler';
 import {
   ANSWERS_REPOSITORY_TOKEN,
   AnswersRepository,
@@ -17,7 +20,8 @@ import { AnswerChallengeDto } from '../dtos';
 @Injectable()
 export class AnswerChallengeService {
   constructor(
-    private readonly kafkaService: KafkaService,
+    @Inject(EVENTS_HANDLER_TOKEN)
+    private readonly eventsHandler: EventsHandler,
     @Inject(ANSWERS_REPOSITORY_TOKEN)
     private readonly answersRepo: AnswersRepository,
     @Inject(CHALLENGES_REPOSITORY_TOKEN)
@@ -47,7 +51,7 @@ export class AnswerChallengeService {
     });
 
     const { grade, status } =
-      await this.kafkaService.triggerChallengeAnsweredEvent({
+      await this.eventsHandler.triggerChallengeAnsweredEvent({
         submissionId: answer.id,
         repositoryUrl: data.repositoryUrl,
       });
