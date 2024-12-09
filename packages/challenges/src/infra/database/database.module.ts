@@ -4,7 +4,7 @@ import { ANSWERS_REPOSITORY_TOKEN } from '@core/repositories/answers';
 import {
   AnswersRepositoryPrisma,
   ChallengesRepositoryPrisma,
-} from './database/repositories';
+} from './repositories';
 import { PaginateQueryService } from './services/paginate-query.service';
 import { PrismaService } from './services/prisma.service';
 
@@ -23,4 +23,4 @@ const repoClasses = [
   providers: [PrismaService, PaginateQueryService, ...repoClasses],
   exports: [PaginateQueryService, ...repoClasses],
 })
-export class InfraModule {}
+export class DatabaseModule {}

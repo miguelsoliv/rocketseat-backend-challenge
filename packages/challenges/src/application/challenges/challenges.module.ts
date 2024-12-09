@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { InfraModule } from '@infra/infra.module';
+import { DatabaseModule } from '@infra/database/database.module';
 import {
   CreateChallengeService,
   ListChallengesService,
@@ -9,7 +9,7 @@ import {
 import { ChallengesResolver } from './challenges.resolver';
 
 @Module({
-  imports: [InfraModule],
+  imports: [DatabaseModule],
   providers: [
     ChallengesResolver,
     CreateChallengeService,

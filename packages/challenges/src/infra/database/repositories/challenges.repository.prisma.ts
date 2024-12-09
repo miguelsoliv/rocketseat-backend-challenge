@@ -4,8 +4,8 @@ import { ChallengesRepository } from '@core/repositories/challenges';
 import { ListPaginatedChallengesRequestDto } from '@core/repositories/challenges/list-paginated-challenges-request.dto';
 import { CreateChallengeRequestDto } from '@core/repositories/challenges/create-challenge-request.dto';
 import { UpdateChallengeRequestDto } from '@core/repositories/challenges/update-challenge-request.dto';
-import { PrismaService } from '../../services/prisma.service';
-import { PaginateQueryService } from '../../services/paginate-query.service';
+import { PrismaService } from '../services/prisma.service';
+import { PaginateQueryService } from '../services/paginate-query.service';
 
 @Injectable()
 export class ChallengesRepositoryPrisma implements ChallengesRepository {

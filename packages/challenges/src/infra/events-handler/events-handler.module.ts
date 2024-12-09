@@ -1,8 +1,9 @@
-import { Inject, Module } from '@nestjs/common';
-import { ClientKafka, ClientsModule, Transport } from '@nestjs/microservices';
+import { Module } from '@nestjs/common';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { Partitioners } from 'kafkajs';
 import { KafkaService } from './kafka.service';
-import { EVENT_HANDLER_TOKEN } from './events-handler.constants';
+
+export const EVENT_HANDLER_TOKEN = 'EVENT_HANDLER';
 
 @Module({
   imports: [
@@ -24,13 +25,4 @@ import { EVENT_HANDLER_TOKEN } from './events-handler.constants';
   providers: [KafkaService],
   exports: [KafkaService],
 })
-export class EventsHandlerModule {
-  constructor(
-    @Inject(EVENT_HANDLER_TOKEN)
-    private readonly kafka: ClientKafka,
-  ) {}
-
-  onModuleInit() {
-    this.kafka.subscribeToResponseOf('challenge.correction');
-  }
-}
+export class EventsHandlerModule {}

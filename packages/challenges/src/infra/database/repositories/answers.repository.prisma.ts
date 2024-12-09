@@ -5,8 +5,8 @@ import { AnswersRepository } from '@core/repositories/answers';
 import { ListPaginatedAnswersRequestDto } from '@core/repositories/answers/list-paginated-answers-request.dto';
 import { UpdateAnswerRequestDto } from '@core/repositories/answers/update-answer-request.dto';
 import { CreateAnswerRequestDto } from '@core/repositories/answers/create-answer-request.dto';
-import { PaginateQueryService } from '../../services/paginate-query.service';
-import { PrismaService } from '../../services/prisma.service';
+import { PaginateQueryService } from '../services/paginate-query.service';
+import { PrismaService } from '../services/prisma.service';
 
 @Injectable()
 export class AnswersRepositoryPrisma implements AnswersRepository {

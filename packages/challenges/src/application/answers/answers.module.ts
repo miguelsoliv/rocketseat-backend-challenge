@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { InfraModule } from '@infra/infra.module';
+import { DatabaseModule } from '@infra/database/database.module';
 import { EventsHandlerModule } from '@infra/events-handler/events-handler.module';
 import {
   AnswerChallengeService,
@@ -8,7 +8,7 @@ import {
 import { AnswersResolver } from './answers.resolver';
 
 @Module({
-  imports: [InfraModule, EventsHandlerModule],
+  imports: [DatabaseModule, EventsHandlerModule],
   providers: [AnswersResolver, AnswerChallengeService, ListAnswersService],
 })
 export class AnswersModule {}
